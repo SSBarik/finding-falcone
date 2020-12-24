@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# Falconator - Geektrust Finding Falcone Solution
+
+[Project Demo](https://falconator.herokuapp.com/).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Installation
+### `yarn`
 
 ## Available Scripts
 
