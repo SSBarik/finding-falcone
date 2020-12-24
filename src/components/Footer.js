@@ -20,7 +20,7 @@ export default function Footer() {
     <footer className={classes.footer}>
       <Typography variant="body2">
         Coding Problem -
-        <Link to={{ pathname: 'www.geektrust.in/finding-falcone' }} target="_blank">
+        <Link to={{ pathname: 'https://geektrust.in/finding-falcone' }} target="_blank">
           www.geektrust.in/finding-falcone
         </Link>
       </Typography>
