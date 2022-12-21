@@ -6,13 +6,13 @@ import {
   Button,
   CircularProgress,
   Grid,
-  Typography
+  Typography,
+  Box
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
 import Skeleton from '@material-ui/lab/Skeleton';
-
 import { Notify } from '../components/common';
 import { DestinationCard } from '../components';
 import { 
@@ -45,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: 6,
     fontSize: '20px',
     fontWeight: 'bold'
+  },
+  tx: {
+    transitionProperty: 'fade',
+    transitionDuration: 5,
+    transitionDelay: 2,
   }
 }));
 
@@ -58,6 +63,7 @@ export default function Dashboard() {
   const vehicles = useVehiclesState();
   const vehiclesDispatch  = useVehiclesDispatch();  
   const [time, setTime] = useState(0);
+  const [timeX, setTimeX] = useState(0);
   const [skeleton, setSkeleton] = useState(false);
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState({ status: false, msg: '' });
@@ -99,7 +105,28 @@ export default function Dashboard() {
         timeTaken += (destination.distance/destination.speed); 
       }
     })
-    setTime(timeTaken);
+    setTimeX(timeTaken);
+    if(timeX < timeTaken) {
+      for(let i = timeX; i < timeTaken; i++) {
+        setTimeout(() => {
+          setTime(i);
+        }, 0);
+      }   
+      
+      setTimeout(() => {
+        setTime(timeTaken);
+      }, 1000);
+    } else {
+      for(let i = timeX; i > timeTaken; i--) {
+        setTimeout(() => {
+          setTime(i);
+        }, 0);
+      }
+      setTimeout(() => {
+        setTime(timeTaken);
+      }, 1000);
+    }
+
   }, [destinations]);
 
   const handleClose = (event, reason) => {
@@ -110,6 +137,7 @@ export default function Dashboard() {
   };
 
   const reset = () => {
+    setTimeX(10);
     const resetDestinations = destinations.map(destination => {
       if(destination.vehicle !== '') {
         vehiclesDispatch({ type: 'RESET', task: destination.vehicle })
@@ -152,6 +180,30 @@ export default function Dashboard() {
         console.log(e);
       }
     }
+  }
+
+  function CircularProgressWithLabel(props) {
+    return (
+      <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+        <CircularProgress variant="determinate" {...props} />
+        <Box
+          sx={{
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Typography variant="caption" component="div" color="text.secondary">
+            {`${Math.round(props.value)}%`}
+          </Typography>
+        </Box>
+      </Box>
+    );
   }
 
   return (
@@ -201,8 +253,8 @@ export default function Dashboard() {
         </Grid>
         <Grid item sm={4} xs={12}>
           {!skeleton && 
-            <Typography variant="h6" color="textSecondary" className={classes.time}>
-              Time taken: {time}
+           <Typography variant="h6" color="textSecondary" className={classes.time}>
+              Time taken: <span className={classes.tx} >{time}</span> 
             </Typography>
           }
         </Grid> 
