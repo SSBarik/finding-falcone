@@ -29,15 +29,14 @@ const useStyles = makeStyles((theme) => ({
     background: 'transparent',
     backdropFilter:  `blur(10px)`,
     border: '1px outset rgba(255, 255, 255, 0.2)',
-    borderRadius: '50px 0px 0px 50px'
-
+    borderRadius: '8px 0px 0px 8px',
   },
   active: {
     backgroundColor: theme.palette.primary.main,
   },
 
   inactive: {
-    border: '2px outset #22b59d'
+    border: '1px outset #f0f0f0'
   }
 
 }));
@@ -78,7 +77,7 @@ export default function SmallScreenNav({ drawerOpen, setState, config }) {
               exact 
               to={item.path}  
               component={NavLink} 
-              style={{marginBottom: '15px', fontSize: 'large', fontWeight: 'bold', color: '#ffffff', borderRadius: '50px'}}
+              style={{marginBottom: '15px', fontSize: 'large', fontWeight: 'bold', color: '#ffffff', borderRadius: '6px', fontFamily: 'monospace', letterSpacing: 3, }}
               className={classes.inactive}
               activeClassName={classes.active}
               onClick={handleDrawerClose}
