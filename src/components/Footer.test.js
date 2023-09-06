@@ -8,5 +8,5 @@ test('renders footer component', () => {
       <Footer />
     </BrowserRouter>
   );
-  expect(screen.getByText('www.geektrust.in/finding-falcone')).toBeInTheDocument();
+  expect(screen.getByText('www.geektrust.com/challenge/space')).toBeInTheDocument();
 });

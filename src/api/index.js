@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = "https://findfalcone.herokuapp.com";
+const URL = "https://findfalcone.geektrust.com";
 
 export const getPlanets = (cancelToken) => axios(`${URL}/planets`, { cancelToken });
 export const getVehicles = (cancelToken) => axios(`${URL}/vehicles`, { cancelToken });
