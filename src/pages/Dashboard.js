@@ -168,6 +168,9 @@ export default function Dashboard() {
     try{
       const token = await getToken(source.current.token);
       const result = await getResult({ ...findData, token: token.data.token }, source.current.token);
+      
+      await timeout(3000); // ensure loader UX 
+
       reset();
       setLoader(false);
       history.push(RESULT, { ...result.data, time });
@@ -204,6 +207,10 @@ export default function Dashboard() {
         </Box>
       </Box>
     );
+  }
+
+  function timeout(delay) {
+    return new Promise( res => setTimeout(res, delay) );
   }
 
   return (
