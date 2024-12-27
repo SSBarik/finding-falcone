@@ -1,6 +1,6 @@
 # Falconator - Geektrust Finding Falcone Solution
 
-[Project Demo](https://falconator.herokuapp.com/).
+[Project Demo](https://falconator.netlify.app/).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
